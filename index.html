@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briarlyn Advisors - Energy Transition Advisory</title>
+  <meta name="description" content="Briarlyn Advisors helps energy companies, industrial businesses, and public sector organisations navigate gas and electricity markets, regulation, and the energy transition." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ──────────────────────────────────────────────── */
+    :root {
+      --green:       #1D4A38;
+      --navy:        #1C2D4F;
+      --gold:        #C9922B;
+      --sage:        #7A9E80;
+      --warm-white:  #F7F4EF;
+      --mid-grey:    #C8C4BC;
+      --charcoal:    #2A2A2A;
+      --heading-font: 'Playfair Display', Georgia, serif;
+      --body-font:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ── Reset ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body-font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--charcoal);
+      background: var(--warm-white);
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout helpers ──────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section { padding: 5rem 0; }
+
+    /* ── Navigation ──────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--green);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: var(--green);
+      color: var(--warm-white);
+      padding: 7rem 0 6rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--body-font);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(2.25rem, 4vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+    }
+    .hero p {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      max-width: 600px;
+      color: rgba(247, 244, 239, 0.85);
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-family: var(--body-font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+    }
+    .btn-gold:hover { background: #b07e22; }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--warm-white);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .hero-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Section headings shared ─────────────────────────────── */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--heading-font);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .section-intro {
+      font-size: 1.0625rem;
+      color: #555;
+      max-width: 620px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ── Services ────────────────────────────────────────────── */
+    .services { background: var(--warm-white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--mid-grey);
+      border-top: 3px solid var(--green);
+      padding: 2rem;
+    }
+    .service-card:nth-child(2) { border-top-color: var(--navy); }
+    .service-card:nth-child(3) { border-top-color: var(--gold); }
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 1.25rem;
+    }
+    .service-icon svg { width: 100%; height: 100%; }
+    .service-card h3 {
+      font-family: var(--heading-font);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    .service-card:nth-child(2) h3 { color: var(--navy); }
+    .service-card:nth-child(3) h3 { color: #8a6018; }
+    .service-card p {
+      font-size: 0.9375rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .service-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .service-list li {
+      font-size: 0.875rem;
+      color: #444;
+      padding: 0.35rem 0;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .service-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      background: var(--sage);
+      border-radius: 50%;
+    }
+
+    /* ── About ───────────────────────────────────────────────── */
+    .about { background: #fff; }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text .section-title { margin-bottom: 1.25rem; }
+    .about-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .pillar {
+      background: var(--warm-white);
+      border-left: 3px solid var(--green);
+      padding: 1.25rem 1.25rem 1.25rem 1rem;
+    }
+    .pillar h4 {
+      font-family: var(--heading-font);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 0.4rem;
+    }
+    .pillar p {
+      font-size: 0.875rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ── Why Briarlyn callout ────────────────────────────────── */
+    .why {
+      background: var(--navy);
+      color: var(--warm-white);
+    }
+    .why .section-title { color: var(--warm-white); }
+    .why .section-intro { color: rgba(247, 244, 239, 0.75); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .why-item {
+      border-top: 2px solid var(--gold);
+      padding-top: 1.25rem;
+    }
+    .why-item h4 {
+      font-family: var(--heading-font);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--warm-white);
+      margin-bottom: 0.5rem;
+    }
+    .why-item p {
+      font-size: 0.875rem;
+      color: rgba(247, 244, 239, 0.72);
+      line-height: 1.65;
+    }
+
+    /* ── Contact ─────────────────────────────────────────────── */
+    .contact { background: var(--warm-white); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .contact-detail-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--green);
+    }
+    .contact-detail span {
+      font-size: 0.9375rem;
+      color: var(--charcoal);
+    }
+    .contact-detail a:hover { color: var(--green); text-decoration: underline; }
+    .contact-form {
+      background: #fff;
+      border: 1px solid var(--mid-grey);
+      padding: 2rem;
+    }
+    .contact-form h3 {
+      font-family: var(--heading-font);
+      font-size: 1.25rem;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--mid-grey);
+      background: var(--warm-white);
+      font-family: var(--body-font);
+      font-size: 0.9375rem;
+      color: var(--charcoal);
+      border-radius: 2px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+    }
+    .form-group textarea { height: 130px; resize: vertical; }
+    .form-submit {
+      background: var(--green);
+      color: var(--warm-white);
+      border: none;
+      width: 100%;
+      padding: 0.85rem;
+      font-family: var(--body-font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: #163829; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      background: var(--green);
+      color: var(--warm-white);
+      padding: 3rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo img { height: 32px; width: auto; opacity: 0.9; }
+    .footer-text {
+      font-size: 0.8125rem;
+      color: rgba(247, 244, 239, 0.6);
+      line-height: 1.6;
+      max-width: 460px;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(247, 244, 239, 0.45);
+      margin-top: 0.4rem;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-inner,
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-pillars { grid-template-columns: 1fr; }
+      .hero { padding: 5rem 0 4rem; }
+      .hero-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+      .btn-outline { margin-left: 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="container">
+      <a class="nav-logo" href="#top">
+        <img src="logo-assets/briarlyn-logo-reversed.png" alt="Briarlyn Advisors" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="container">
+      <p class="hero-eyebrow">Energy Transition Advisory</p>
+      <div class="hero-rule"></div>
+      <h1>Translating energy market complexity into clear strategy</h1>
+      <p>Briarlyn Advisors provides expert advisory on gas and electricity wholesale markets, regulatory affairs, and decarbonisation - to energy companies, industrial businesses, and the public sector.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-gold">Get in touch</a>
+        <a href="#services" class="btn btn-outline">Our services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ────────────────────────────────────────────── -->
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-label">What we do</p>
+      <h2 class="section-title">Advisory across the energy value chain</h2>
+      <p class="section-intro">Our work spans wholesale markets, regulatory strategy, and energy transition planning - grounded in direct sector experience and delivered at executive level.</p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="42" height="42" rx="2" stroke="#1D4A38" stroke-width="1.5"/>
+              <polyline points="8,32 16,20 23,25 30,14 36,18" stroke="#1D4A38" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="30" cy="14" r="2.5" fill="#C9922B"/>
+            </svg>
+          </div>
+          <h3>Gas &amp; Electricity Wholesale Markets</h3>
+          <p>Deep expertise in GB and European energy trading and market dynamics - from price formation and settlement to market structure and liquidity.</p>
+          <ul class="service-list">
+            <li>Wholesale market analysis and price risk</li>
+            <li>Trading strategy and commercial review</li>
+            <li>Imbalance and balancing mechanism</li>
+            <li>Market structure reform and response</li>
+            <li>Power Purchase Agreements (PPAs)</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="42" height="42" rx="2" stroke="#1C2D4F" stroke-width="1.5"/>
+              <path d="M12 34 L12 20 L20 26 L20 16 L28 22 L28 12 L36 18" stroke="#1C2D4F" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+              <line x1="8" y1="34" x2="38" y2="34" stroke="#1C2D4F" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3>Regulation &amp; Policy</h3>
+          <p>Regulatory affairs advisory for businesses navigating Ofgem, DESNZ, and broader GB energy policy - helping clients understand, respond to, and shape the regulatory environment.</p>
+          <ul class="service-list">
+            <li>Ofgem consultation responses</li>
+            <li>Licence condition analysis</li>
+            <li>Retail market regulation</li>
+            <li>Network charging and access reform</li>
+            <li>Government policy interpretation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="42" height="42" rx="2" stroke="#C9922B" stroke-width="1.5"/>
+              <ellipse cx="22" cy="30" rx="14" ry="5" stroke="#C9922B" stroke-width="1.5" fill="none"/>
+              <line x1="22" y1="25" x2="22" y2="10" stroke="#C9922B" stroke-width="1.5"/>
+              <line x1="22" y1="10" x2="14" y2="20" stroke="#C9922B" stroke-width="1.5"/>
+              <line x1="22" y1="10" x2="30" y2="20" stroke="#C9922B" stroke-width="1.5"/>
+              <circle cx="22" cy="10" r="2" fill="#C9922B"/>
+            </svg>
+          </div>
+          <h3>Energy Transition for Industry &amp; Infrastructure</h3>
+          <p>Strategic advisory for industrial businesses and infrastructure operators on decarbonisation pathways, clean energy procurement, and positioning within the energy transition.</p>
+          <ul class="service-list">
+            <li>Decarbonisation pathway assessment</li>
+            <li>Clean energy strategy and procurement</li>
+            <li>Grid connection and flexibility</li>
+            <li>Hydrogen and low-carbon fuel options</li>
+            <li>Public sector transition planning</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ────────────────────────────────────────────────── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-text">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Sector expertise. Strategic perspective.</h2>
+          <p>Briarlyn Advisors was founded to provide the kind of rigorous, commercially grounded advice that energy companies and industrial organisations need as the sector undergoes structural transformation.</p>
+          <p>We work at the intersection of wholesale markets, regulation, and the energy transition - advising at director and board level on decisions where technical complexity meets commercial and policy risk.</p>
+          <p>Our clients include energy suppliers, generators, large industrial consumers, network businesses, and public sector bodies. We are equally at home advising on day-ahead market strategy and on ten-year decarbonisation plans.</p>
+        </div>
+        <div class="about-pillars">
+          <div class="pillar">
+            <h4>Clarity in complexity</h4>
+            <p>The energy transition is technically and commercially intricate. We make it navigable.</p>
+          </div>
+          <div class="pillar">
+            <h4>Sector credibility</h4>
+            <p>Deep expertise in renewables, grid infrastructure, decarbonisation, and policy.</p>
+          </div>
+          <div class="pillar">
+            <h4>Strategic perspective</h4>
+            <p>Beyond data and news - advice on positioning, direction, and commercial exposure.</p>
+          </div>
+          <div class="pillar">
+            <h4>Public &amp; private fluency</h4>
+            <p>Equally at home with Whitehall and with project finance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why Briarlyn ──────────────────────────────────────────── -->
+  <section class="why">
+    <div class="container">
+      <p class="section-label" style="color: var(--gold);">Our approach</p>
+      <h2 class="section-title">How we work</h2>
+      <p class="section-intro">We resist hype. The energy transition is long-term, and so is our lens. We present analysis honestly - including where progress is slow, contested, or uncertain.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <h4>Evidence-based</h4>
+          <p>We write and speak with confidence grounded in data and direct sector experience - not received wisdom or market narrative.</p>
+        </div>
+        <div class="why-item">
+          <h4>Precise</h4>
+          <p>We say what we mean. Active voice, concrete figures, clear recommendations - not hedged generalities.</p>
+        </div>
+        <div class="why-item">
+          <h4>Forward-looking</h4>
+          <p>We focus on what's coming: regulatory change, market structure shifts, and the evolving commercial landscape for decarbonisation.</p>
+        </div>
+        <div class="why-item">
+          <h4>Genuinely engaged</h4>
+          <p>We are committed to the outcomes of the energy transition - commercially, technically, and in terms of what it means for society and industry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <p class="section-label">Contact</p>
+          <h2 class="section-title">Let's talk</h2>
+          <p>If you're working through a market, regulatory, or energy transition challenge and would benefit from expert advisory support, we'd like to hear from you.</p>
+          <p>Initial conversations are always confidential and without obligation.</p>
+
+          <div class="contact-detail">
+            <svg class="contact-detail-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 5l8 5 8-5M2 5h16v11H2V5z" stroke="#1D4A38" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span><a href="mailto:robin.cannings@gmail.com">robin.cannings@gmail.com</a></span>
+          </div>
+
+          <div class="contact-detail">
+            <svg class="contact-detail-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="16" height="16" rx="2" stroke="#1D4A38" stroke-width="1.4" fill="none"/>
+              <path d="M6 9.5v5M6 6v1M10 14.5V9m0-3v1M14 14.5v-3m0-5.5v1" stroke="#1D4A38" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span><a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn - Briarlyn Advisors</a></span>
+          </div>
+
+          <div class="contact-detail">
+            <svg class="contact-detail-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="8" r="3.5" stroke="#1D4A38" stroke-width="1.4" fill="none"/>
+              <path d="M3.5 17c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke="#1D4A38" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span>Based in the UK - working nationally and internationally</span>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3>Send an enquiry</h3>
+          <form action="mailto:robin.cannings@gmail.com" method="post" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="org">Organisation</label>
+              <input type="text" id="org" name="organisation" placeholder="Company or organisation" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@organisation.com" required />
+            </div>
+            <div class="form-group">
+              <label for="topic">Area of interest</label>
+              <select id="topic" name="topic">
+                <option value="">Select a service area</option>
+                <option>Gas &amp; Electricity Wholesale Markets</option>
+                <option>Regulation &amp; Policy</option>
+                <option>Energy Transition - Industry &amp; Infrastructure</option>
+                <option>Other / Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Brief message</label>
+              <textarea id="message" name="message" placeholder="Tell us about the challenge or question you're working on…"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send enquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a class="footer-logo" href="#top">
+          <img src="logo-assets/briarlyn-logo-reversed.png" alt="Briarlyn Advisors" />
+        </a>
+        <div>
+          <p class="footer-text">Briarlyn Advisors - expert advisory on gas and electricity markets, energy regulation, and the energy transition. Serving energy companies, industrial businesses, and the public sector.</p>
+          <p class="footer-copy">© 2026 Briarlyn Advisors. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
